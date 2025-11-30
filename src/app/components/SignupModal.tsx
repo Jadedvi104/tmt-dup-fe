@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import { showNotification } from '@/utils/notification';
 
 interface SignupModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type SignupRole = 'traveler' | 'expert' | null;
+type SignupRole = 'traveler' | 'local-expert' | null;
 
 /**
  * Signup Modal Component
@@ -21,26 +22,67 @@ export const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
 
     if (!selectedRole) {
-      console.error('Please select a role');
+      setError('Please select a role');
+      showNotification('Please select a role', 'error');
       return;
     }
 
     if (password !== confirmPassword) {
-      console.error('Passwords do not match');
+      setError('Passwords do not match');
+      showNotification('Passwords do not match', 'error');
+      return;
+    }
+
+    if (password.length < 6) {
+      setError('Password must be at least 6 characters');
+      showNotification('Password must be at least 6 characters', 'error');
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Simulate signup API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log('Signup with:', { fullName, email, password, role: selectedRole });
+      const [firstName, ...lastNameParts] = fullName.trim().split(' ');
+      const lastName = lastNameParts.join(' ') || '';
+
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password,
+          phone: '',
+          role: selectedRole === 'traveler' ? 'traveler' : 'local-expert',
+          location: {
+            country: '',
+            city: '',
+            coordinates: {
+              latitude: 0,
+              longitude: 0,
+            },
+          },
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Signup failed');
+      }
+
+      showNotification('Account created successfully! Please log in.', 'success');
+      
       // Reset form and close modal
       setFullName('');
       setEmail('');
@@ -48,9 +90,13 @@ export const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => 
       setConfirmPassword('');
       setSelectedRole(null);
       setTermsAccepted(false);
+      setError('');
       onClose();
     } catch (error) {
-      console.error('Signup failed:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Signup failed. Please try again.';
+      setError(errorMessage);
+      showNotification(errorMessage, 'error');
+      console.error('Signup error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -135,7 +181,7 @@ export const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => 
 
                 {/* Local Expert Card */}
                 <button
-                  onClick={() => setSelectedRole('expert')}
+                  onClick={() => setSelectedRole('local-expert')}
                   className="p-8 border-2 border-gray-200 rounded-xl hover:border-cyan-600 hover:bg-cyan-50 transition-all hover:shadow-lg cursor-pointer group"
                 >
                   <div className="text-5xl mb-4 text-center">🌟</div>
@@ -265,6 +311,16 @@ export const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onClose }) => 
 
             {/* Email/Password Form */}
             <form onSubmit={handleSignup} className="space-y-4">
+              {/* Error Message */}
+              {error && (
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2">
+                  <svg className="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm text-red-800">{error}</span>
+                </div>
+              )}
+
               {/* Full Name Input */}
               <div>
                 <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">

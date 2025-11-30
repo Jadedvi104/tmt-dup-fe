@@ -59,7 +59,7 @@ const userSchema = new Schema<IUser>(
     },
     phone: {
       type: String,
-      required: [true, 'Phone number is required'],
+      required: [false, 'Phone number is not required'],
     },
     password: {
       type: String,
