@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Header, HeroSection, RecommendedTours, BrowseCategory, CallToActionBanner, Footer } from '@/app/components';
+import { Header, HeroSection, RecommendedTours, BrowseCategory, CallToActionBanner, RequestCustomTour, Testimonials, Footer } from '@/app/components';
 import { featuredTours, categories, navLinks } from '@/app/constants/data';
 import { showNotification } from '@/app/utils/notification';
 
@@ -33,7 +33,9 @@ const App: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <RecommendedTours tours={featuredTours} />
+          <RequestCustomTour />
           <BrowseCategory categories={categories} />
+          <Testimonials />
           <CallToActionBanner />
         </div>
       </main>

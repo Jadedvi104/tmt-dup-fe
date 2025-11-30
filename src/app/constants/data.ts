@@ -128,3 +128,110 @@ export const specialDeals = [
     image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=500&h=300&fit=crop'
   }
 ];
+
+// Category to Cities Mapping
+export const categoryCities: Record<string, { name: string; description: string; image: string }[]> = {
+  'day-trips': [
+    {
+      name: 'Bangkok',
+      description: 'Perfect for day trips with temples, markets, and street food',
+      image: 'https://images.unsplash.com/photo-1552520514-5fefe8c9ef14?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Ayutthaya',
+      description: 'Historical ruins and ancient temples just a short trip from Bangkok',
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Kanchanaburi',
+      description: 'Bridge over the River Kwai and WWII history',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    }
+  ],
+  'food-and-culture': [
+    {
+      name: 'Bangkok',
+      description: 'World-famous street food and cultural experiences',
+      image: 'https://images.unsplash.com/photo-1552520514-5fefe8c9ef14?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Chiang Mai',
+      description: 'Northern Thai cuisine and hill tribe culture',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Phuket',
+      description: 'Fusion of Thai and international cuisine with local markets',
+      image: 'https://images.unsplash.com/photo-1537996051806-82cb40b68cef?w=400&h=300&fit=crop'
+    }
+  ],
+  'water-sports': [
+    {
+      name: 'Phuket',
+      description: 'World-class diving, snorkeling, and water activities',
+      image: 'https://images.unsplash.com/photo-1537996051806-82cb40b68cef?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Koh Samui',
+      description: 'Island hopping and marine life exploration',
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Krabi',
+      description: 'Kayaking, rock climbing, and pristine beaches',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    }
+  ],
+  'nature-trails': [
+    {
+      name: 'Chiang Mai',
+      description: 'Mountain trekking and elephant sanctuaries',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Pai',
+      description: 'Scenic valley hikes and hot springs',
+      image: 'https://images.unsplash.com/photo-1552520514-5fefe8c9ef14?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Khao Yai',
+      description: 'National park with waterfalls and wildlife',
+      image: 'https://images.unsplash.com/photo-1537996051806-82cb40b68cef?w=400&h=300&fit=crop'
+    }
+  ],
+  'cooking-classes': [
+    {
+      name: 'Bangkok',
+      description: 'Authentic Thai cooking schools and market tours',
+      image: 'https://images.unsplash.com/photo-1552520514-5fefe8c9ef14?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Chiang Mai',
+      description: 'Northern Thai cuisine and herb garden experiences',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Phuket',
+      description: 'Seafood cooking and tropical ingredient classes',
+      image: 'https://images.unsplash.com/photo-1537996051806-82cb40b68cef?w=400&h=300&fit=crop'
+    }
+  ],
+  'photography': [
+    {
+      name: 'Chiang Mai',
+      description: 'Golden Triangle photography and cultural portraits',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Bangkok',
+      description: 'Street photography and architectural shots',
+      image: 'https://images.unsplash.com/photo-1552520514-5fefe8c9ef14?w=400&h=300&fit=crop'
+    },
+    {
+      name: 'Ayutthaya',
+      description: 'Historic ruins and landscape photography',
+      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop'
+    }
+  ]
+};
+

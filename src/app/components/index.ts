@@ -9,3 +9,5 @@ export { CallToActionBanner } from './CallToActionBanner';
 export { Footer } from './Footer';
 export { LoginModal } from './LoginModal';
 export { SignupModal } from './SignupModal';
+export { RequestCustomTour } from './RequestCustomTour';
+export { Testimonials } from './Testimonials';
